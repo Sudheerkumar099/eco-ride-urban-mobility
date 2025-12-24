@@ -1,13 +1,12 @@
-from vehicle import *
+from electric_scooter import ElectricScooter
+from electric_car import ElectricCar
 class EcoRideMain :
     def greet():
         print("Welcome to Eco-Ride Urban Mobility System")
 
 if __name__ == "__main__" :
     EcoRideMain.greet()
-    v= Vehicle(123,"bmw",100)
-    print(v.get_battery_percentage())
-    v.set_maintenance_status("all good")
-    print(v.get_maintenance_status())
-    v.set_rental_price(50)
-    print(v.get_rental_price())
+    e = ElectricScooter(123,"ather",90,100)
+    print(e.max_speed_limit)
+    c = ElectricCar(1,"bmw",90,4)
+    print(c.seating_capacity)
