@@ -4,9 +4,15 @@ class EcoRideMain :
     def greet():
         print("Welcome to Eco-Ride Urban Mobility System")
 
+    def main():
+        EcoRideMain.greet()
+    ather = ElectricScooter(123,"ather",90,100)
+    ola = ElectricScooter(124,"ola",80,100)
+    car = ElectricCar(125,"bmw",90,4)
+    lst = [ather,car,ola]
+    for i in lst:
+        print(i.calculate_trip_cost(50))
+
 if __name__ == "__main__" :
-    EcoRideMain.greet()
-    e = ElectricScooter(123,"ather",90,100)
-    print(e.calculate_trip_cost(20))
-    c = ElectricCar(1,"bmw",90,4)
-    print(c.calculate_trip_cost(30))
+   EcoRideMain.main()
+    
