@@ -6,3 +6,10 @@ class ElectricScooter(Vehicle):
             self.max_speed_limit=max_speed_limit
         else:
             raise Exception("speed should be greater that 0")
+    
+    def calculate_trip_cost(self,distance):
+        if distance>=0 :
+            print("Total cost is : ")
+            return distance*5
+        else :
+            raise Exception("Distance must be a positive number")

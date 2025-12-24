@@ -1,3 +1,4 @@
+from abc import ABC,abstractmethod
 class Vehicle:
     def __init__(self,vehicle_id,model,battery_percentage):
         self.vehicle_id = vehicle_id
@@ -28,4 +29,9 @@ class Vehicle:
             self.__rental_price=rental_price  
         else:
            raise ValueError
+
+    @abstractmethod
+    def calculate_trip_cost(self,distance):
+        pass
+    '''child class must implement'''
 

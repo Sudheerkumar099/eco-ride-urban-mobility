@@ -6,3 +6,10 @@ class ElectricCar(Vehicle):
             self.seating_capacity=seating_capacity
         else :
             raise Exception("seating capacity should be grater than zero")
+    
+    def calculate_trip_cost(self,distance):
+        if distance>=0 :
+            print("Total cost is : ")
+            return distance*5
+        else :
+            raise Exception("Distance must be a positive number")
