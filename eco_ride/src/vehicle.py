@@ -29,6 +29,11 @@ class Vehicle:
             self.__rental_price=rental_price  
         else:
            raise ValueError
+    
+    def __eq__(self,other) :
+        if isinstance(other,Vehicle):
+            return self.vehicle_id == other.vehicle_id
+        return False
 
     @abstractmethod
     def calculate_trip_cost(self,distance):

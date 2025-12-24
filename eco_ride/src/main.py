@@ -12,9 +12,9 @@ class EcoRideMain :
         car = ElectricCar(125,"bmw",90,4)
         fm = Fleetmanager()
         fm.add_hub()
-        # fm.add_vehicle_to_hub()
-        # fm.add_vehicle_to_hub()
-        fm.add_multiple_vehicles_to_hub()
+        fm.add_vehicle_to_hub()
+        fm.add_vehicle_to_hub()
+        fm.add_vehicle_to_hub()
     
 
 if __name__ == "__main__" :
