@@ -7,6 +7,7 @@ class Vehicle:
         self.set_battery_percentage(battery_percentage)
 
         self.__maintenance_status="Available"
+        self.__rental_price = 100
     
     def get_battery_percentage(self):
         return self.__battery_percentage
@@ -38,7 +39,7 @@ class Vehicle:
         return False      
 
     def __str__(self):
-        return (f"ID: {self.vehicle_id} Model: {self.model} Battery Percentage: {self.get_battery_percentage()}%")
+        return (f"{type(self)} ID: {self.vehicle_id} Model: {self.model} Battery Percentage: {self.get_battery_percentage()}%")
    
     @abstractmethod
     def calculate_trip_cost(self,distance):

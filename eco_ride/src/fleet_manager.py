@@ -3,6 +3,8 @@ from electric_car import ElectricCar
 class Fleetmanager:
     def __init__(self):
         self.hubs={"airport":[ElectricScooter(123,"ather",9,100),ElectricScooter(124,"ola",8,100),ElectricCar(125,"bmw",90,4)]}
+
+        self.hubs["airport"][2].set_rental_price(300)
     
     def add_hub(self):
         hub_name = input("Please Enter the hub name :\n") 
@@ -108,6 +110,7 @@ class Fleetmanager:
         print(f"Under Maintenance vehicles    : {status_count["Under Maintenance"]}")
 
     def sort_by_model(self):
+
         hub_name = input("Enter the hub name to sort Vehicles:\n")
 
         if hub_name not in self.hubs:
@@ -131,3 +134,37 @@ class Fleetmanager:
             for i in vehicles:
                 if v == i.model:
                     print(i)
+
+    def sort_by_battery(self):
+        hub_name = input("Enter the hub name to sort Vehicles:\n")
+
+        if hub_name not in self.hubs:
+            print(f"Hub {hub_name} does not exist")
+            return
+        vehicles = self.hubs[hub_name]
+        if not vehicles:
+            print(f"No vehicles are present in the Hub")
+            return
+        sorted_vehicles = sorted(vehicles,key = lambda v: v.get_battery_percentage(),reverse=True)
+
+        for v in sorted_vehicles:
+            print(v)
+
+    def sort_by_fare(self):
+        hub_name = input("Enter the hub name to sort Vehicles:\n")
+
+        if hub_name not in self.hubs:
+            print(f"Hub {hub_name} does not exist")
+            return
+        vehicles = self.hubs[hub_name]
+        if not vehicles:
+            print(f"No vehicles are present in the Hub")
+            return
+        sorted_vehicles = sorted(vehicles,key = lambda v: v.get_rental_price(),reverse=True)
+
+        for v in sorted_vehicles:
+            print(f" {v} , Rental price: {v.get_rental_price()}")
+
+
+
+        
