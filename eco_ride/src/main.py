@@ -8,10 +8,7 @@ class EcoRideMain :
     def main():
         EcoRideMain.greet()
         fm = Fleetmanager()
-        lst = fm.hubs["airport"]
-        lst[2].set_maintenance_status("On Trip")
-        lst[1].set_maintenance_status("Under Maintenance")
-        fm.status_analytics()
+        fm.sort_by_model()
     
 if __name__ == "__main__" :
    EcoRideMain.main()

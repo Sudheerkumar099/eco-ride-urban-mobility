@@ -106,3 +106,28 @@ class Fleetmanager:
         print(f"Available vehicles            : {status_count["Available"]}")
         print(f"On Trip vehicles              : {status_count["On Trip"]}")
         print(f"Under Maintenance vehicles    : {status_count["Under Maintenance"]}")
+
+    def sort_by_model(self):
+        hub_name = input("Enter the hub name to sort Vehicles:\n")
+
+        if hub_name not in self.hubs:
+            print(f"Hub {hub_name} does not exist")
+            return
+        vehicles = self.hubs[hub_name]
+
+        if not vehicles:
+            print(f"No vehicles are present in the Hub")
+            return
+
+        sorted_vehicles = []
+
+        for v in vehicles:
+            sorted_vehicles.append(v.model.lower())
+        sorted_vehicles.sort()
+
+        print(f"These are the vehicle models from {hub_name}")
+        
+        for v in sorted_vehicles:
+            for i in vehicles:
+                if v == i.model:
+                    print(i)

@@ -37,6 +37,9 @@ class Vehicle:
             return self.vehicle_id == other.vehicle_id
         return False      
 
+    def __str__(self):
+        return (f"ID: {self.vehicle_id} Model: {self.model} Battery Percentage: {self.get_battery_percentage()}%")
+   
     @abstractmethod
     def calculate_trip_cost(self,distance):
         pass
