@@ -2,7 +2,7 @@ from electric_scooter import ElectricScooter
 from electric_car import ElectricCar
 class Fleetmanager:
     def __init__(self):
-        self.hubs={}
+        self.hubs={"airport":[ElectricScooter(123,"ather",9,100),ElectricScooter(124,"ola",8,100),ElectricCar(125,"bmw",90,4)]}
     
     def add_hub(self):
         hub_name = input("Please Enter the hub name :\n") 
@@ -47,3 +47,34 @@ class Fleetmanager:
         self.hubs[hub_name].append(vehicle)
         print("vehicle added success fully")
         print(self.hubs)    
+
+    def search_vehicles_by_hub(self):
+        hub_name = input("Enter the name of the hub to get vehicle details:\n")
+        if hub_name not in self.hubs:
+            print(f"Hub {hub_name} does not exist.")
+            return
+        vehicles = self.hubs[hub_name]
+
+        if not vehicles:
+            print(f"No vehicles are present in the hub {hub_name}")
+            return
+        
+        for v in vehicles:
+            v.display_details()
+
+    def search_by_battery_percent(self):
+        hub_name = input("Enter the Hub name To get the Vehicle\n")
+        if hub_name not in self.hubs:
+            print(f"{hub_name} does not exist in the Hubs")
+            return
+        vehicles = self.hubs[hub_name]
+
+        high_battery = list(filter(lambda v : v.get_battery_percentage() > 80, vehicles))
+
+        if not high_battery:
+            print(f"No vehicles found with battery greater that 80% in {hub_name}")
+            return
+
+        for v in high_battery :
+            v.display_details()
+            

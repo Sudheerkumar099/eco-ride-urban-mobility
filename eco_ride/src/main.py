@@ -7,16 +7,10 @@ class EcoRideMain :
 
     def main():
         EcoRideMain.greet()
-        ather = ElectricScooter(123,"ather",90,100)
-        ola = ElectricScooter(124,"ola",80,100)
-        car = ElectricCar(125,"bmw",90,4)
         fm = Fleetmanager()
-        fm.add_hub()
-        fm.add_vehicle_to_hub()
-        fm.add_vehicle_to_hub()
-        fm.add_vehicle_to_hub()
+        fm.search_vehicles_by_hub()
+        fm.search_by_battery_percent()
     
-
 if __name__ == "__main__" :
    EcoRideMain.main()
     

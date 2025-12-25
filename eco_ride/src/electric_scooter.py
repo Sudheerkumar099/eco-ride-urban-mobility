@@ -13,3 +13,6 @@ class ElectricScooter(Vehicle):
             return 1.00+(distance * 0.15)
         else :
             raise Exception("Distance must be a positive number")
+    
+    def display_details(self):
+        print(f"ElectricScooter-ID: {self.vehicle_id}, Model: {self.model}, Battery percentage: {self.get_battery_percentage()}, Speed limit: {self.max_speed_limit}")
