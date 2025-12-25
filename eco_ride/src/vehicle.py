@@ -5,6 +5,8 @@ class Vehicle:
         self.model = model
         self.battery_percentage = None
         self.set_battery_percentage(battery_percentage)
+
+        self.__maintenance_status="Available"
     
     def get_battery_percentage(self):
         return self.__battery_percentage

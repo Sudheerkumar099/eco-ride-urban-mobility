@@ -78,3 +78,31 @@ class Fleetmanager:
         for v in high_battery :
             v.display_details()
             
+    def categorized_view(self):
+        vehicles_dict = {"Electric Cars":[],"Electric Scooters":[]}
+
+        for vehicles in self.hubs.values():
+            for vehicle in vehicles:
+                if isinstance(vehicle,ElectricCar):
+                    vehicles_dict["Electric Cars"].append(vehicle)
+                elif isinstance(vehicle,ElectricScooter):
+                    vehicles_dict["Electric Scooters"].append(vehicle)
+        
+        for vehicle_type, vehicles in vehicles_dict.items():
+            print(f"\n{vehicle_type}")
+            if not vehicles:
+                print("No vehicles are present")
+            else:
+                for v in vehicles:
+                    v.display_details()
+    
+    def status_analytics(self):
+        status_count = {"Available":0,"On Trip":0,"Under Maintenance":0}
+        for vehicles in self.hubs.values():
+            for vehicle in vehicles:
+                status = vehicle.get_maintenance_status()
+                if status in status_count:
+                    status_count[status]+=1
+        print(f"Available vehicles            : {status_count["Available"]}")
+        print(f"On Trip vehicles              : {status_count["On Trip"]}")
+        print(f"Under Maintenance vehicles    : {status_count["Under Maintenance"]}")
