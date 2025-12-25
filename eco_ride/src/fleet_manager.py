@@ -1,3 +1,4 @@
+import json
 import csv
 from electric_scooter import ElectricScooter
 from electric_car import ElectricCar
@@ -200,8 +201,37 @@ class Fleetmanager:
         except:
             print("File not Found")
 
-    
+    def save_to_json(self,file_name="fleet_data.json"):
+        data={}
 
-
-
+        for hub_name,vehicles in self.hubs.items():
+            data[hub_name]=[]
+            for vehicle in vehicles:
+                if isinstance(vehicle, ElectricCar):
+                    data[hub_name].append({"type":"ElectricCar","vehicle_id":vehicle.vehicle_id,"model":vehicle.model,"battery": vehicle.get_battery_percentage(),"extra": vehicle.seating_capacity})
+                elif isinstance(vehicle,ElectricScooter):
+                    data[hub_name].append({"type":"ElectricScooter","vehicle_id":vehicle.vehicle_id,"model":vehicle.model,"battery":vehicle.get_battery_percentage(),"extra":vehicle.max_speed_limit})
+        with open(file_name,"w") as file:
+            json.dump(data,file,indent=4)
         
+        print("Fleet data saved to JSON successfully")
+    
+    def load_from_json(self,file_name="fleet_data.json"):
+        try:
+            with open(file_name,"r") as file:
+                data = json.load(file)
+            
+            for hub_name , vehicles in data.items():
+                self.hubs[hub_name]=[]
+
+                for v in vehicles:
+                    if v["type"] == "ElectricCar":
+                        vehicle = ElectricCar(v["vehicle_id"],v["model"],v["battery"],v["extra"])
+                    elif v["type"] == "ElectricScooter":
+                        vehicle = ElectricScooter(v["vehicle_id"],v["model"],v["battery"],v["extra"])
+                    
+                    self.hubs[hub_name].append(vehicle)
+            print("Fleet data loaded from JSON")
+            print(self.hubs)
+        except:
+            print(f"Json file {file_name} not found")
