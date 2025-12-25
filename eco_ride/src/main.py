@@ -8,7 +8,7 @@ class EcoRideMain :
     def main():
         EcoRideMain.greet()
         fm = Fleetmanager()
-        fm.sort_by_fare()
+        fm.load_from_csv()
     
 if __name__ == "__main__" :
    EcoRideMain.main()

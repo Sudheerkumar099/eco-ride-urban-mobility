@@ -1,3 +1,4 @@
+import csv
 from electric_scooter import ElectricScooter
 from electric_car import ElectricCar
 class Fleetmanager:
@@ -164,6 +165,42 @@ class Fleetmanager:
 
         for v in sorted_vehicles:
             print(f" {v} , Rental price: {v.get_rental_price()}")
+
+    def save_to_csv(self,filename="fleet_data.csv"):
+        with open(filename,mode="w",newline="")as file:
+            writer = csv.writer(file)
+
+            writer.writerow(["hub_name","vehicle_type","vehicle_id","model","battery","extra"])
+            for hub_name,vehicles in self.hubs.items():
+                for vehicle in vehicles:
+                    if isinstance(vehicle, ElectricCar):
+                        writer.writerow([hub_name,"ElectricCar",vehicle.vehicle_id,vehicle.model,vehicle.get_battery_percentage(),vehicle.seating_capacity])
+                    elif isinstance(vehicle, ElectricScooter):
+                        writer.writerow([hub_name,"ElectricScooter",vehicle.vehicle_id,vehicle.model,vehicle.get_battery_percentage(),vehicle.max_speed_limit])
+        print("Fleet data saved to CSV successfully")
+    
+    def load_from_csv(self, filename="fleet_data.csv"):
+        try:
+            with open(filename,mode="r") as file:
+                reader = csv.DictReader(file)
+
+                for row in reader:
+                    hub_name = row["hub_name"]
+
+                    if hub_name not in self.hubs:
+                        self.hubs[hub_name]=[]
+
+                    if row["vehicle_type"] == "ElectricCar":
+                        vehicle = ElectricCar(row["vehicle_id"],row["model"],int(row["battery"]),int(row["extra"]))
+                    elif row["vehicle_type"] == "ElectricScooter":
+                        vehicle = ElectricScooter(row["vehicle_id"],row["model"],int(row["battery"]),int(row["extra"]))
+                    self.hubs[hub_name].append(vehicle)
+                print(f"Data loaded from {filename} successfully")
+                    
+        except:
+            print("File not Found")
+
+    
 
 
 

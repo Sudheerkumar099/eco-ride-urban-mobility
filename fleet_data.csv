@@ -1,0 +1,4 @@
+hub_name,vehicle_type,vehicle_id,model,battery,extra
+airport,ElectricScooter,123,ather,9,100
+airport,ElectricScooter,124,ola,8,100
+airport,ElectricCar,125,bmw,90,4
