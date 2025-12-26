@@ -98,6 +98,7 @@ class Fleetmanager:
             else:
                 for v in vehicles:
                     v.display_details()
+        return vehicles_dict
     
     def status_analytics(self):
         status_count = {"available":0,"on trip":0,"under maintenance":0}
@@ -109,6 +110,8 @@ class Fleetmanager:
         print(f"Available vehicles            : {status_count["available"]}")
         print(f"On Trip vehicles              : {status_count["on trip"]}")
         print(f"Under Maintenance vehicles    : {status_count["under maintenance"]}")
+
+        return status_count
 
     def sort_by_model(self):
 

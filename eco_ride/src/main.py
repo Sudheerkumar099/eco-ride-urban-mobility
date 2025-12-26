@@ -8,7 +8,8 @@ class EcoRideMain :
     def main():
         EcoRideMain.greet()
         fm = Fleetmanager()
-        fm.load_from_json()
+        fm.add_vehicle_to_hub()
+
 if __name__ == "__main__" :
    EcoRideMain.main()
     
