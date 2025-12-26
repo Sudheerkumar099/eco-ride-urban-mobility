@@ -7,7 +7,7 @@ class Fleetmanager:
         self.hubs={"airport":[ElectricScooter(123,"ather",9,100),ElectricScooter(124,"ola",8,100),ElectricCar(125,"bmw",90,4)]}
 
         self.hubs["airport"][2].set_rental_price(300)
-    
+
     def add_hub(self):
         hub_name = input("Please Enter the hub name :\n") 
         if hub_name in self.hubs:
