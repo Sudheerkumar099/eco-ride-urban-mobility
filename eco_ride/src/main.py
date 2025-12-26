@@ -9,7 +9,6 @@ class EcoRideMain :
         EcoRideMain.greet()
         fm = Fleetmanager()
         fm.load_from_json()
-    
 if __name__ == "__main__" :
    EcoRideMain.main()
     

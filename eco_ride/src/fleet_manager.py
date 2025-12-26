@@ -24,7 +24,6 @@ class Fleetmanager:
             return
 
         option = input("Select the vehicle you want to add :\nEnter 1 for Electric Scooter \nEnter 2 for Electric Car\n")
-        print("Enter 1 for Electric Scooter \n Enter 2 for Electric Car")
         vehicle = None
         id = input("Enter the id of the Vehicle:\n")
         model = input("Enter the model of the vehicle:\n")
@@ -35,10 +34,10 @@ class Fleetmanager:
             vehicle = ElectricScooter(id,model,battery_percentage,max_speed)
 
         elif option == "2":
-            max_capacity = int(input("Enter the max Speed of the vehicle"))
+            max_capacity = int(input("Enter the max capacity of the vehicle\n"))
             vehicle = ElectricCar(id,model,battery_percentage,max_capacity)
         else:
-            print("Invalid option")
+            print(f"Invalid option {option} does not Exist")
             return
         
         existing_vehicles = self.hubs[hub_name]
@@ -50,7 +49,7 @@ class Fleetmanager:
 
         self.hubs[hub_name].append(vehicle)
         print("vehicle added success fully")
-        print(self.hubs)    
+        # print(self.hubs)    
 
     def search_vehicles_by_hub(self):
         hub_name = input("Enter the name of the hub to get vehicle details:\n")
@@ -101,15 +100,15 @@ class Fleetmanager:
                     v.display_details()
     
     def status_analytics(self):
-        status_count = {"Available":0,"On Trip":0,"Under Maintenance":0}
+        status_count = {"available":0,"on trip":0,"under maintenance":0}
         for vehicles in self.hubs.values():
             for vehicle in vehicles:
                 status = vehicle.get_maintenance_status()
                 if status in status_count:
                     status_count[status]+=1
-        print(f"Available vehicles            : {status_count["Available"]}")
-        print(f"On Trip vehicles              : {status_count["On Trip"]}")
-        print(f"Under Maintenance vehicles    : {status_count["Under Maintenance"]}")
+        print(f"Available vehicles            : {status_count["available"]}")
+        print(f"On Trip vehicles              : {status_count["on trip"]}")
+        print(f"Under Maintenance vehicles    : {status_count["under maintenance"]}")
 
     def sort_by_model(self):
 
@@ -135,7 +134,7 @@ class Fleetmanager:
         for v in sorted_vehicles:
             for i in vehicles:
                 if v == i.model:
-                    print(i)
+                    i.display_details()
 
     def sort_by_battery(self):
         hub_name = input("Enter the hub name to sort Vehicles:\n")
@@ -150,7 +149,7 @@ class Fleetmanager:
         sorted_vehicles = sorted(vehicles,key = lambda v: v.get_battery_percentage(),reverse=True)
 
         for v in sorted_vehicles:
-            print(v)
+            v.display_details()
 
     def sort_by_fare(self):
         hub_name = input("Enter the hub name to sort Vehicles:\n")
@@ -165,7 +164,8 @@ class Fleetmanager:
         sorted_vehicles = sorted(vehicles,key = lambda v: v.get_rental_price(),reverse=True)
 
         for v in sorted_vehicles:
-            print(f" {v} , Rental price: {v.get_rental_price()}")
+            v.display_details()
+            print(f"Rental price: {v.get_rental_price()}")
 
     def save_to_csv(self,filename="fleet_data.csv"):
         with open(filename,mode="w",newline="")as file:
@@ -178,7 +178,7 @@ class Fleetmanager:
                         writer.writerow([hub_name,"ElectricCar",vehicle.vehicle_id,vehicle.model,vehicle.get_battery_percentage(),vehicle.seating_capacity])
                     elif isinstance(vehicle, ElectricScooter):
                         writer.writerow([hub_name,"ElectricScooter",vehicle.vehicle_id,vehicle.model,vehicle.get_battery_percentage(),vehicle.max_speed_limit])
-        print("Fleet data saved to CSV successfully")
+        print(f"Fleet data saved to CSV successfully to {filename}")
     
     def load_from_csv(self, filename="fleet_data.csv"):
         try:
@@ -225,9 +225,9 @@ class Fleetmanager:
                 self.hubs[hub_name]=[]
 
                 for v in vehicles:
-                    if v["type"] == "ElectricCar":
+                    if v["type"] == "ElectricCar": 
                         vehicle = ElectricCar(v["vehicle_id"],v["model"],v["battery"],v["extra"])
-                    elif v["type"] == "ElectricScooter":
+                    elif v["type"] == "ElectricScooter": 
                         vehicle = ElectricScooter(v["vehicle_id"],v["model"],v["battery"],v["extra"])
                     
                     self.hubs[hub_name].append(vehicle)
